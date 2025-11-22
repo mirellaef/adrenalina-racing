@@ -28,7 +28,6 @@ const Admin = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Verificar se está autenticado
     const isAdmin = localStorage.getItem('isAdmin');
     if (!isAdmin) {
       navigate('/login');
@@ -91,10 +90,8 @@ const Admin = () => {
     e.preventDefault();
     try {
       if (editingProduct && editingProduct.id) {
-        // Editar produto
         await api.put(`/api/products/${editingProduct.id}`, formData);
       } else {
-        // Criar produto
         await api.post('/api/products', formData);
       }
       await fetchProducts();

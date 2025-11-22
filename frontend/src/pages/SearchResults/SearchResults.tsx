@@ -37,7 +37,6 @@ const SearchResults = () => {
     fetchProducts();
   }, []);
 
-  // Atualizar categoria quando o parâmetro da URL mudar
   useEffect(() => {
     if (categoryParam) {
       setSelectedCategory(categoryParam);

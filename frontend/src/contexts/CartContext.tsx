@@ -30,7 +30,6 @@ const CART_STORAGE_KEY = 'adrenalina-racing-cart';
 const PAYMENT_METHOD_STORAGE_KEY = 'adrenalina-racing-payment-method';
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  // Carregar do localStorage na inicialização
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const savedCart = localStorage.getItem(CART_STORAGE_KEY);
     return savedCart ? JSON.parse(savedCart) : [];
@@ -43,12 +42,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return (savedPaymentMethod as 'pix' | 'credit') || 'pix';
   });
 
-  // Salvar no localStorage sempre que o carrinho mudar
   useEffect(() => {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Salvar no localStorage sempre que o método de pagamento mudar
   useEffect(() => {
     localStorage.setItem(PAYMENT_METHOD_STORAGE_KEY, paymentMethod);
   }, [paymentMethod]);

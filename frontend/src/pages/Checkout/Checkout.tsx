@@ -39,13 +39,11 @@ const Checkout = () => {
       return;
     }
 
-    // Validação de endereço
     if (!address.street || !address.number || !address.neighborhood || !address.city || !address.state || !address.zipCode) {
       alert('Por favor, preencha todos os campos obrigatórios do endereço.');
       return;
     }
 
-    // Validação de cartão se for cartão
     if (paymentMethod === 'credit') {
       if (!cardData.cardNumber || !cardData.cardName || !cardData.expiryDate || !cardData.cvv) {
         alert('Por favor, preencha todos os dados do cartão.');
@@ -53,7 +51,6 @@ const Checkout = () => {
       }
     }
 
-    // Validação de PIX se for PIX
     if (paymentMethod === 'pix' && !pixGenerated) {
       alert('Por favor, gere o código PIX primeiro.');
       return;
@@ -61,7 +58,6 @@ const Checkout = () => {
 
     setProcessing(true);
 
-    // Simular processamento de pagamento
     setTimeout(() => {
       clearCart();
       setProcessing(false);

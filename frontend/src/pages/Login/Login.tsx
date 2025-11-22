@@ -19,7 +19,6 @@ const Login = () => {
       const response = await api.post('/api/login', { username, password });
 
       if (response.data.success) {
-        // Salvar token/sessão (em produção usar localStorage ou contexto)
         localStorage.setItem('isAdmin', 'true');
         localStorage.setItem('adminUser', JSON.stringify(response.data.user));
         navigate('/admin');
