@@ -1,0 +1,107 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Kit Plástico CRF 230",
+      "price": 450,
+      "image": "https://images.tcdn.com.br/img/img_prod/746349/kit_4ction_crf_230_biker_adesivo_de_aleta_1721_1_3e40a64028a557ccf7616fff038f4271.jpg",
+      "category": "Para Moto",
+      "description": "Kit completo de plásticos para Honda CRF 230, fabricado em material de alta qualidade e resistência. Inclui todos os componentes necessários para renovar a aparência da sua moto. Ideal para quem busca durabilidade e acabamento impecável."
+    },
+    {
+      "id": 2,
+      "name": "Suporte com Pedaleira Aço Inox",
+      "price": 320,
+      "image": "https://gringamx.fbitsstatic.net/img/p/kit-pedaleira-e-suporte-crf-250f-inox-90175/283816.jpg?w=1200&h=1200&v=no-value",
+      "category": "Para Moto",
+      "description": "Suporte com pedaleira em aço inoxidável de alta qualidade. Proporciona maior conforto e segurança durante as trilhas. Resistente à corrosão e com acabamento premium."
+    },
+    {
+      "id": 3,
+      "name": "Tampão Escape 4 Tempos",
+      "price": 85,
+      "image": "https://cdn.awsli.com.br/300x300/2703/2703737/produto/256606298/tamp-o-escape-4-tempos-vermelho-vzrdjyavio.png",
+      "category": "Para Moto",
+      "description": "Tampão para escape de motos 4 tempos. Protege o sistema de escape contra entrada de água e sujeira. Fácil instalação e remoção."
+    },
+    {
+      "id": 4,
+      "name": "Tanque Adaptável XR 200",
+      "price": 580,
+      "image": "https://gringamx.fbitsstatic.net/img/p/tanque-de-combustivel-crf-230-7-litros-adaptavel-xr-200-x-cell-78276/264950-1.jpg?w=1200&h=1200&v=202508111739",
+      "category": "Para Moto",
+      "description": "Tanque adaptável para Honda XR 200 com maior capacidade. Fabricado em material resistente e com design que mantém o centro de gravidade baixo. Ideal para trilhas longas."
+    },
+    {
+      "id": 5,
+      "name": "Number Plate CRF 230",
+      "price": 120,
+      "image": "https://endurancemagazine.cdn.magazord.com.br/img/2023/02/produto/1615/biker-01330408-4-number-plate-first-230-vm.jpg?ims=fit-in/600x600/filters:fill(white)",
+      "category": "Para Moto",
+      "description": "Number plate original para Honda CRF 230. Design esportivo e resistente, perfeito para personalizar sua moto."
+    },
+    {
+      "id": 6,
+      "name": "Kit Plástico CRF 250",
+      "price": 520,
+      "image": "https://gringamx.fbitsstatic.net/img/p/kit-plastico-crf-250f-completo-biker-4ction-vermelho-branco-96357/296055-3.jpg?w=1200&h=1200&v=202504141647",
+      "category": "Para Moto",
+      "description": "Kit completo de plásticos para Honda CRF 250. Material de alta qualidade, resistente a impactos e intempéries. Inclui todos os componentes necessários."
+    },
+    {
+      "id": 7,
+      "name": "Aliviador de Embreagem",
+      "price": 180,
+      "image": "https://gringamx.fbitsstatic.net/img/p/aliviador-de-embreagem-crf-250f-amx-89655/282864.jpg?w=1200&h=1200&v=no-value",
+      "category": "Oficina",
+      "description": "Aliviador de embreagem que reduz o esforço necessário para acionar a embreagem em até 30%. Facilita muito o uso em trilhas longas."
+    },
+    {
+      "id": 8,
+      "name": "Kit Plástico CRF 230 Pro",
+      "price": 480,
+      "image": "https://images.tcdn.com.br/img/img_prod/634051/kit_plastico_biker_next_crf_230_adesivos_e_banco_avtec_2043698960_1_20201028112911.jpg",
+      "category": "Para Moto",
+      "description": "Versão Pro do kit de plásticos para CRF 230. Material ainda mais resistente e acabamento premium. Ideal para uso intensivo."
+    },
+    {
+      "id": 9,
+      "name": "Capacete Off Road",
+      "price": 350,
+      "image": "https://cf.shopee.com.br/file/sg-11134201-22110-93xktdfjb1jv53",
+      "category": "Para Pilotos",
+      "description": "Capacete off road com certificação de segurança. Design aerodinâmico, sistema de ventilação eficiente e visor removível. Conforto e proteção em trilhas."
+    },
+    {
+      "id": 10,
+      "name": "Luvas de Proteção",
+      "price": 95,
+      "image": "https://images.tcdn.com.br/img/img_prod/634051/luva_ktm_com_protecao_maos_motocross_trilha_2043688969_1_20200609191408.jpg",
+      "category": "Para Pilotos",
+      "description": "Luvas de proteção para trilhas com reforços estratégicos. Material respirável e resistente. Proteção completa para as mãos durante as aventuras."
+    },
+    {
+      "id": 11,
+      "name": "Ferramenta Multiuso",
+      "price": 150,
+      "image": "https://mtbbrasilia.com.br/wp-content/uploads/2013/09/Park_Tool_IB-3.jpg",
+      "category": "Oficina",
+      "description": "Ferramenta multiuso completa para manutenção de motos. Inclui diversas chaves e ferramentas essenciais. Compacta e prática para levar nas trilhas."
+    },
+    {
+      "name": "Bota de Trilha",
+      "price": 420,
+      "image": "https://motosneno.cdn.magazord.com.br/img/2024/11/produto/44479/28120.jpg?ims=800x800",
+      "category": "Para Pilotos",
+      "description": "Bota de trilha com proteção completa para canela e tornozelo. Solado antiderrapante, material impermeável e respirável. Conforto e segurança em todas as condições.",
+      "id": 12
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "1234"
+    }
+  ]
+}

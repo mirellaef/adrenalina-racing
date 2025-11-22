@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 export interface CartItem {
   id: number;
@@ -12,6 +12,7 @@ export interface CartItem {
 interface CartContextType {
   cartItems: CartItem[];
   isCartOpen: boolean;
+  paymentMethod: 'pix' | 'credit';
   openCart: () => void;
   closeCart: () => void;
   addToCart: (product: Omit<CartItem, 'quantity'>) => void;
@@ -19,16 +20,46 @@ interface CartContextType {
   updateQuantity: (id: number, quantity: number) => void;
   getTotalPrice: () => number;
   getTotalItems: () => number;
+  setPaymentMethod: (method: 'pix' | 'credit') => void;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+const CART_STORAGE_KEY = 'adrenalina-racing-cart';
+const PAYMENT_METHOD_STORAGE_KEY = 'adrenalina-racing-payment-method';
+
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  // Carregar do localStorage na inicialização
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const [paymentMethod, setPaymentMethod] = useState<'pix' | 'credit'>(() => {
+    const savedPaymentMethod = localStorage.getItem(PAYMENT_METHOD_STORAGE_KEY);
+    return (savedPaymentMethod as 'pix' | 'credit') || 'pix';
+  });
+
+  // Salvar no localStorage sempre que o carrinho mudar
+  useEffect(() => {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // Salvar no localStorage sempre que o método de pagamento mudar
+  useEffect(() => {
+    localStorage.setItem(PAYMENT_METHOD_STORAGE_KEY, paymentMethod);
+  }, [paymentMethod]);
 
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
+
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem(CART_STORAGE_KEY);
+  };
 
   const addToCart = (product: Omit<CartItem, 'quantity'>) => {
     setCartItems((prevItems) => {
@@ -76,6 +107,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       value={{
         cartItems,
         isCartOpen,
+        paymentMethod,
         openCart,
         closeCart,
         addToCart,
@@ -83,6 +115,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         updateQuantity,
         getTotalPrice,
         getTotalItems,
+        setPaymentMethod,
+        clearCart,
       }}
     >
       {children}

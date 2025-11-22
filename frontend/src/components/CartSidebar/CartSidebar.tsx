@@ -1,9 +1,10 @@
 import { FaTimes, FaPlus, FaMinus, FaShoppingCart } from 'react-icons/fa';
-import { useCart } from '../contexts/CartContext';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../contexts/CartContext';
 import './CartSidebar.css';
-import api from '../service/api';
 
 const CartSidebar = () => {
+  const navigate = useNavigate();
   const {
     cartItems,
     isCartOpen,
@@ -11,19 +12,16 @@ const CartSidebar = () => {
     updateQuantity,
     removeFromCart,
     getTotalPrice,
+    paymentMethod,
+    setPaymentMethod,
   } = useCart();
 
   const total = getTotalPrice();
 
   const handleCheckout = () => {
-    // Só para testar se a API está funcionando
-    api.get('/health').then((response) => {
-      alert(response.data.message);
-    }).catch((error) => {
-      alert('Erro ao processar checkout: ' + error.message);
-    });
-    // TODO: Implementar checkout
-    // window.location.href = '/checkout';
+    if (cartItems.length === 0) return;
+    closeCart();
+    navigate('/checkout');
   };
 
   if (!isCartOpen) return null;
@@ -85,25 +83,27 @@ const CartSidebar = () => {
 
               <div className="cart-divider"></div>
 
-              <div className="cart-promo">
-                <label htmlFor="promo-code">Código de compra</label>
-                <input
-                  type="text"
-                  id="promo-code"
-                  placeholder="Digite o código"
-                  className="promo-input"
-                />
-              </div>
-
               <div className="cart-payment">
                 <h3>Forma de Pagamento</h3>
                 <div className="payment-options">
                   <label className="payment-option">
-                    <input type="radio" name="payment" value="pix" defaultChecked />
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="pix"
+                      checked={paymentMethod === 'pix'}
+                      onChange={() => setPaymentMethod('pix')}
+                    />
                     <span>Pix</span>
                   </label>
                   <label className="payment-option">
-                    <input type="radio" name="payment" value="credit" />
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="credit"
+                      checked={paymentMethod === 'credit'}
+                      onChange={() => setPaymentMethod('credit')}
+                    />
                     <span>Crédito</span>
                   </label>
                 </div>

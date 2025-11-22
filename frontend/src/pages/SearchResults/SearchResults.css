@@ -78,7 +78,7 @@
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: #FF6B00;
+  accent-color: #ff6b00;
 }
 
 .filter-option span {
@@ -115,11 +115,20 @@
 }
 
 .price-input:focus {
-  border-color: #FF6B00;
+  border-color: #ff6b00;
 }
 
 .price-input::placeholder {
   color: #666;
+}
+
+.price-input:-webkit-autofill,
+.price-input:-webkit-autofill:hover,
+.price-input:-webkit-autofill:focus,
+.price-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #1a1a1a inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #ff6b00 !important;
 }
 
 .price-separator {
@@ -216,12 +225,12 @@
 .search-product-price {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #FF6B00;
+  color: #ff6b00;
   margin: 0 0 1rem 0;
 }
 
 .search-product-button {
-  background-color: #FF6B00;
+  background-color: #ff6b00;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -270,4 +279,3 @@
     height: 200px;
   }
 }
-

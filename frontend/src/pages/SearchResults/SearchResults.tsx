@@ -1,129 +1,48 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { useCart } from '../contexts/CartContext';
-import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
+import { useCart } from '../../contexts/CartContext';
+import { productsService } from '../../service/products';
+import type { Product } from '../../types/product';
+import Footer from '../../components/Footer/Footer';
+import WhatsAppButton from '../../components/WhatsAppButton/WhatsAppButton';
 import './SearchResults.css';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  description: string;
-}
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const query = searchParams.get('q') || '';
+  const categoryParam = searchParams.get('category') || '';
 
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({
-    min: 0,
-    max: 10000,
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam || 'all');
+  const [priceRange, setPriceRange] = useState<{ min: string; max: string }>({
+    min: '',
+    max: '',
   });
 
-  const allProducts: Product[] = [
-    { 
-      id: 1, 
-      name: 'Kit Plástico CRF 230', 
-      price: 450.00, 
-      image: 'https://placehold.co/300x300/FF6B00/FFFFFF?text=Kit+Plastico', 
-      category: 'Para Moto',
-      description: 'Kit completo de plásticos para Honda CRF 230'
-    },
-    { 
-      id: 2, 
-      name: 'Suporte com Pedaleira Aço Inox', 
-      price: 320.00, 
-      image: 'https://placehold.co/300x300/DC143C/FFFFFF?text=Suporte', 
-      category: 'Para Moto',
-      description: 'Suporte com pedaleira em aço inoxidável'
-    },
-    { 
-      id: 3, 
-      name: 'Tampão Escape 4 Tempos', 
-      price: 85.00, 
-      image: 'https://placehold.co/300x300/DAA520/FFFFFF?text=Tampao', 
-      category: 'Para Moto',
-      description: 'Tampão para escape de motos 4 tempos'
-    },
-    { 
-      id: 4, 
-      name: 'Tanque Adaptável XR 200', 
-      price: 580.00, 
-      image: 'https://placehold.co/300x300/000000/FFFFFF?text=Tanque', 
-      category: 'Para Moto',
-      description: 'Tanque adaptável para Honda XR 200'
-    },
-    { 
-      id: 5, 
-      name: 'Number Plate CRF 230', 
-      price: 120.00, 
-      image: 'https://placehold.co/300x300/FF6B00/FFFFFF?text=Number+Plate', 
-      category: 'Para Moto',
-      description: 'Number plate original para Honda CRF 230'
-    },
-    { 
-      id: 6, 
-      name: 'Kit Plástico CRF 250', 
-      price: 520.00, 
-      image: 'https://placehold.co/300x300/DC143C/FFFFFF?text=Kit+250', 
-      category: 'Para Moto',
-      description: 'Kit completo de plásticos para Honda CRF 250'
-    },
-    { 
-      id: 7, 
-      name: 'Aliviador de Embreagem', 
-      price: 180.00, 
-      image: 'https://placehold.co/300x300/DAA520/FFFFFF?text=Aliviador', 
-      category: 'Oficina',
-      description: 'Aliviador de embreagem que reduz o esforço em até 30%'
-    },
-    { 
-      id: 8, 
-      name: 'Kit Plástico CRF 230 Pro', 
-      price: 480.00, 
-      image: 'https://placehold.co/300x300/000000/FFFFFF?text=Kit+Pro', 
-      category: 'Para Moto',
-      description: 'Versão Pro do kit de plásticos para CRF 230'
-    },
-    { 
-      id: 9, 
-      name: 'Capacete Off Road', 
-      price: 350.00, 
-      image: 'https://placehold.co/300x300/FF6B00/FFFFFF?text=Capacete', 
-      category: 'Para Pilotos',
-      description: 'Capacete off road com certificação de segurança'
-    },
-    { 
-      id: 10, 
-      name: 'Luvas de Proteção', 
-      price: 95.00, 
-      image: 'https://placehold.co/300x300/DC143C/FFFFFF?text=Luvas', 
-      category: 'Para Pilotos',
-      description: 'Luvas de proteção para trilhas'
-    },
-    { 
-      id: 11, 
-      name: 'Ferramenta Multiuso', 
-      price: 150.00, 
-      image: 'https://placehold.co/300x300/DAA520/FFFFFF?text=Ferramenta', 
-      category: 'Oficina',
-      description: 'Ferramenta multiuso completa para manutenção'
-    },
-    { 
-      id: 12, 
-      name: 'Bota de Trilha', 
-      price: 420.00, 
-      image: 'https://placehold.co/300x300/000000/FFFFFF?text=Bota', 
-      category: 'Para Pilotos',
-      description: 'Bota de trilha com proteção completa'
-    },
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const products = await productsService.getAll();
+        setAllProducts(products);
+      } catch (error) {
+        console.error('Erro ao carregar produtos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Atualizar categoria quando o parâmetro da URL mudar
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [categoryParam]);
 
   const filteredProducts = useMemo(() => {
     let filtered = allProducts;
@@ -140,23 +59,36 @@ const SearchResults = () => {
       filtered = filtered.filter((product) => product.category === selectedCategory);
     }
 
+    const minPrice = priceRange.min === '' ? 0 : Number(priceRange.min);
+    const maxPrice = priceRange.max === '' ? 10000 : Number(priceRange.max);
+
     filtered = filtered.filter(
-      (product) => product.price >= priceRange.min && product.price <= priceRange.max
+      (product) => product.price >= minPrice && product.price <= maxPrice
     );
 
     return filtered;
-  }, [query, selectedCategory, priceRange]);
+  }, [allProducts, query, selectedCategory, priceRange]);
 
   const handleProductClick = (id: number) => {
     navigate(`/product/${id}`);
   };
+
+  if (loading) {
+    return (
+      <div className="search-results-page">
+        <div className="search-results-container">
+          <div style={{ textAlign: 'center', padding: '40px' }}>Carregando produtos...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="search-results-page">
       <div className="search-results-container">
         <aside className="filters-sidebar">
           <h2 className="filters-title">Filtros</h2>
-          
+
           <div className="filter-section">
             <h3 className="filter-section-title">Categoria</h3>
             <div className="filter-options">
@@ -210,11 +142,11 @@ const SearchResults = () => {
                 <input
                   type="number"
                   placeholder="Preço mínimo"
-                  value={priceRange.min || ''}
+                  value={priceRange.min}
                   onChange={(e) =>
                     setPriceRange({
                       ...priceRange,
-                      min: Number(e.target.value) || 0,
+                      min: e.target.value,
                     })
                   }
                   className="price-input"
@@ -222,11 +154,11 @@ const SearchResults = () => {
                 <input
                   type="number"
                   placeholder="Preço máximo"
-                  value={priceRange.max || ''}
+                  value={priceRange.max}
                   onChange={(e) =>
                     setPriceRange({
                       ...priceRange,
-                      max: Number(e.target.value) || 10000,
+                      max: e.target.value,
                     })
                   }
                   className="price-input"

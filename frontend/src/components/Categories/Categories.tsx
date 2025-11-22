@@ -1,30 +1,37 @@
+import { useNavigate } from 'react-router-dom';
 import { FaMotorcycle, FaTools, FaUser } from 'react-icons/fa';
 import './Categories.css';
 
 const Categories = () => {
+  const navigate = useNavigate();
+
   const categories = [
     {
       id: 1,
       name: 'Para Moto',
       icon: FaMotorcycle,
       color: '#000000',
-      link: '#para-moto'
+      category: 'Para Moto'
     },
     {
       id: 2,
       name: 'Oficina',
       icon: FaTools,
       color: '#DC143C',
-      link: '#oficina'
+      category: 'Oficina'
     },
     {
       id: 3,
       name: 'Para Pilotos',
       icon: FaUser,
       color: '#DAA520',
-      link: '#para-pilotos'
+      category: 'Para Pilotos'
     }
   ];
+
+  const handleCategoryClick = (category: string) => {
+    navigate(`/search?category=${encodeURIComponent(category)}`);
+  };
 
   return (
     <section className="categories-section">
@@ -32,15 +39,15 @@ const Categories = () => {
         {categories.map((category) => {
           const Icon = category.icon;
           return (
-            <a
+            <button
               key={category.id}
-              href={category.link}
+              onClick={() => handleCategoryClick(category.category)}
               className="category-card"
               style={{ backgroundColor: category.color }}
             >
               <Icon className="category-icon" />
               <span className="category-name">{category.name}</span>
-            </a>
+            </button>
           );
         })}
       </div>

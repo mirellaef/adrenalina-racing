@@ -42,7 +42,7 @@
 }
 
 .back-button:hover {
-  color: #FF6B00;
+  color: #ff6b00;
 }
 
 .back-icon {
@@ -78,7 +78,16 @@
 }
 
 .search-input:focus {
-  border-color: #FF6B00;
+  border-color: #ff6b00;
+}
+
+.search-input:-webkit-autofill,
+.search-input:-webkit-autofill:hover,
+.search-input:-webkit-autofill:focus,
+.search-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #2a2a2a inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #ff6b00 !important;
 }
 
 .search-button {
@@ -96,7 +105,7 @@
 }
 
 .search-button:hover {
-  color: #FF6B00;
+  color: #ff6b00;
 }
 
 .search-icon {
@@ -118,14 +127,14 @@
 }
 
 .cart-button:hover {
-  color: #FF6B00;
+  color: #ff6b00;
 }
 
 .cart-badge {
   position: absolute;
   top: 0.25rem;
   right: 0.25rem;
-  background-color: #FF6B00;
+  background-color: #ff6b00;
   color: white;
   border-radius: 50%;
   width: 20px;
@@ -161,7 +170,7 @@
 }
 
 .nav-link:hover {
-  background-color: #FF6B00;
+  background-color: #ff6b00;
   color: white;
 }
 
@@ -195,4 +204,3 @@
     display: none;
   }
 }
-
