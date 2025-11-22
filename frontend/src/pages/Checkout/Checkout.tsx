@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import { useCart } from '../../contexts/CartContext';
 import './Checkout.css';
 
@@ -35,27 +36,27 @@ const Checkout = () => {
 
   const handlePayment = async () => {
     if (cartItems.length === 0) {
-      alert('Seu carrinho está vazio!');
+      toast.error('Seu carrinho está vazio!');
       return;
     }
 
     // Validação de endereço
     if (!address.street || !address.number || !address.neighborhood || !address.city || !address.state || !address.zipCode) {
-      alert('Por favor, preencha todos os campos obrigatórios do endereço.');
+      toast.error('Por favor, preencha todos os campos obrigatórios do endereço.');
       return;
     }
 
     // Validação de cartão se for cartão
     if (paymentMethod === 'credit') {
       if (!cardData.cardNumber || !cardData.cardName || !cardData.expiryDate || !cardData.cvv) {
-        alert('Por favor, preencha todos os dados do cartão.');
+        toast.error('Por favor, preencha todos os dados do cartão.');
         return;
       }
     }
 
     // Validação de PIX se for PIX
     if (paymentMethod === 'pix' && !pixGenerated) {
-      alert('Por favor, gere o código PIX primeiro.');
+      toast.error('Por favor, gere o código PIX primeiro.');
       return;
     }
 
